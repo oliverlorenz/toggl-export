@@ -1,6 +1,3 @@
-import { Project, ProjectHandler } from "./projectsHandler";
-import { WorkspaceHandler } from "./workspaceHandler";
-
 export interface Client {
   id: number;
   name: string;
