@@ -16,7 +16,7 @@ export class ExportHandler {
     const workspaces = new WorkspaceHandler(this.togglClient);
     await workspaces.getAll();
     const projects = new ProjectHandler(this.togglClient, workspaces);
-    const projectList = await projects.getAll();
+    await projects.getAll();
     const users = new UserHandler(this.togglClient, workspaces);
     await users.getAll();
     const clients = new ClientHandler(this.togglClient);
