@@ -1,3 +1,4 @@
+import { Client } from "./clientHandler";
 import { Project } from "./projectsHandler";
 import { TimeEntry } from "./timeEntryHandler";
 import { User } from "./userHandler";
@@ -7,5 +8,6 @@ export interface Raw {
   workspace: Workspace;
   project: Project;
   user: User;
+  client: Client;
   raw: TimeEntry;
 }

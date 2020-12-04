@@ -3,6 +3,7 @@ import { WorkspaceHandler } from "./workspaceHandler";
 export interface Project {
   id: number;
   name: string;
+  cid: number;
 }
 
 export class ProjectHandler {
