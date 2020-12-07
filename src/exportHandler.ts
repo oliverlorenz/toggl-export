@@ -56,6 +56,7 @@ export class ExportHandler {
             name: entry.user.name,
             project: entry.project?.name,
             client: entry.client?.name,
+            description: entry.raw.description,
             date: {
               year: new Date(entry.raw.start).getFullYear(),
               month: new Date(entry.raw.start).getMonth() + 1,

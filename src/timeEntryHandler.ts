@@ -6,6 +6,7 @@ export interface TimeEntry {
   start: Date;
   stop: Date;
   duration: number;
+  description: string;
 }
 
 export class TimeEntryHandler {
