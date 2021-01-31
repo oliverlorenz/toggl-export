@@ -22,7 +22,18 @@ const togglClient = new TogglClient({
 
 (async () => {
   const handler = new ExportHandler(togglClient);
-  const data = await handler.export();
+  let startDate = new Date(
+    process.env.START_DATE || "2007-01-01T00:00:00.000Z"
+  );
+
+  let data: Object[] = [];
+  let dataSet: { time: { start: Date } }[] = [];
+  do {
+    dataSet = await handler.export(startDate);
+    const lastElement = dataSet[dataSet.length - 1];
+    startDate = new Date(lastElement.time.start);
+    data = data.concat(dataSet);
+  } while (dataSet.length === 1000);
 
   switch (command["format"].toLowerCase()) {
     case "json":

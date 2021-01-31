@@ -8,8 +8,7 @@ import { Workspace, WorkspaceHandler } from "./workspaceHandler";
 export class ExportHandler {
   constructor(private togglClient: any) {}
 
-  async export() {
-    const startDate = new Date(process.env.START_DATE || "2015-01-01");
+  async export(startDate: Date) {
     const timeEntries = new TimeEntryHandler(this.togglClient, startDate);
     let timeEntryList = await timeEntries.getAll();
     // timeEntryList = [timeEntryList[0]];
