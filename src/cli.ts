@@ -3,6 +3,10 @@
 import { Command } from "commander";
 import { ExportHandler } from "./exportHandler";
 import { stringify } from "yaml";
+import { WorkspaceHandler } from "./workspaceHandler";
+import { ProjectHandler } from "./projectsHandler";
+import { UserHandler } from "./userHandler";
+import { ClientHandler } from "./clientHandler";
 
 var TogglClient = require("toggl-api");
 
@@ -21,7 +25,22 @@ const togglClient = new TogglClient({
 });
 
 (async () => {
-  const handler = new ExportHandler(togglClient);
+  const workspaces = new WorkspaceHandler(togglClient);
+  await workspaces.getAll();
+  const projects = new ProjectHandler(togglClient, workspaces);
+  await projects.getAll();
+  const users = new UserHandler(togglClient, workspaces);
+  await users.getAll();
+  const clients = new ClientHandler(togglClient);
+  await clients.getAll();
+
+  const handler = new ExportHandler(
+    togglClient,
+    workspaces,
+    projects,
+    users,
+    clients
+  );
   let startDate = new Date(
     process.env.START_DATE || "2007-01-01T00:00:00.000Z"
   );
