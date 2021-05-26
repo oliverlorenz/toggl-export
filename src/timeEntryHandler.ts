@@ -20,7 +20,6 @@ export class TimeEntryHandler {
           start,
           new Date(),
           (err: Error, timeEntries: TimeEntry[]) => {
-            console.log(timeEntries.length);
             if (err) return reject(err);
             resolve(timeEntries);
           }
