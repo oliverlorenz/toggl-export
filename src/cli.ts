@@ -8,7 +8,7 @@ import { ProjectHandler } from "./projectsHandler";
 import { UserHandler } from "./userHandler";
 import { ClientHandler } from "./clientHandler";
 
-var TogglClient = require("toggl-api");
+var TogglClient = require("@natterstefan/toggl-api");
 
 const command = new Command()
   .requiredOption("-f, --format <format>", "export file format")
