@@ -7,6 +7,15 @@ import { WorkspaceHandler } from "./workspaceHandler";
 import { ProjectHandler } from "./projectsHandler";
 import { UserHandler } from "./userHandler";
 import { ClientHandler } from "./clientHandler";
+import * as moment from "moment";
+
+type DataSet = {
+  time: {
+    description?: string;
+    start: string;
+    duration: number;
+  };
+};
 
 var TogglClient = require("@natterstefan/toggl-api");
 
@@ -45,9 +54,10 @@ const togglClient = new TogglClient({
     process.env.START_DATE || "2007-01-01T00:00:00.000Z"
   );
 
-  let data: Object[] = [];
-  let dataSet: { time: { start: Date } }[] = [];
+  let data: DataSet[] = [];
+  let dataSet: DataSet[] = [];
   do {
+    // @ts-ignore
     dataSet = await handler.export(startDate);
     const lastElement = dataSet[dataSet.length - 1];
     startDate = new Date(lastElement.time.start);
@@ -60,6 +70,26 @@ const togglClient = new TogglClient({
       break;
     case "yaml":
       console.log(stringify(data));
+      break;
+    case "csv-jira-assistant":
+      console.log(
+        ["Ticket No", "Start Date", "Timespent", "Comment"].join(",")
+      );
+
+      data.forEach((dataSet: DataSet) => {
+        const matches = dataSet.time.description?.match(/(\w+-\d+)(.+)?/);
+        if (matches) {
+          const [, ticketNo, description] = matches;
+          console.log(
+            [
+              ticketNo,
+              moment(dataSet.time.start).format("YYYY-MM-DD hh:mm"),
+              `${Math.round(dataSet.time.duration / 60)}m`,
+              description?.trim(),
+            ].join(",")
+          );
+        }
+      });
       break;
 
     default:
