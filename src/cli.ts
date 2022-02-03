@@ -83,7 +83,7 @@ const togglClient = new TogglClient({
           console.log(
             [
               ticketNo,
-              moment(dataSet.time.start).format("YYYY-MM-DD hh:mm"),
+              moment(dataSet.time.start).format("YYYY-MM-DD HH:mm"),
               `${Math.round(dataSet.time.duration / 60)}m`,
               description?.trim(),
             ].join(",")
