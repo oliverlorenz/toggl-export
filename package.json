@@ -14,7 +14,7 @@
     "@babel/core": "7.12.9",
     "@babel/preset-env": "7.12.7",
     "@babel/preset-typescript": "7.12.7",
-    "@commitlint/cli": "11.0.0",
+    "@commitlint/cli": "17.4.4",
     "@commitlint/config-conventional": "11.0.0",
     "@semantic-release/github": "7.2.0",
     "@types/jest": "26.0.16",
